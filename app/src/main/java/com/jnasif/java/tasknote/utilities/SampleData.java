@@ -1,6 +1,6 @@
 package com.jnasif.java.tasknote.utilities;
 
-import com.jnasif.java.tasknote.model.TaskNoteEntity;
+import com.jnasif.java.tasknote.database.TaskNoteEntity;
 
 import java.util.ArrayList;
 import java.util.List;

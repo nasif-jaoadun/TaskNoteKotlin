@@ -3,8 +3,6 @@ package com.jnasif.java.tasknote;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -13,7 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jnasif.java.tasknote.databinding.ActivityMainBinding;
-import com.jnasif.java.tasknote.model.TaskNoteEntity;
+import com.jnasif.java.tasknote.database.TaskNoteEntity;
 import com.jnasif.java.tasknote.ui.TaskNoteAdapter;
 import com.jnasif.java.tasknote.utilities.SampleData;
 

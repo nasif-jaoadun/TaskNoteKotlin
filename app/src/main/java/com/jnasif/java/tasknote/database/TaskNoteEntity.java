@@ -1,23 +1,31 @@
-package com.jnasif.java.tasknote.model;
+package com.jnasif.java.tasknote.database;
 
 import java.util.Date;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "taskNotes")
 public class TaskNoteEntity {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private Date createDate;
     private String taskNameText;
-    private boolean taskStatus;
+    private boolean taskDone;
 
+    @Ignore
     public TaskNoteEntity() {
     }
 
-    public TaskNoteEntity(int id, Date createDate, String taskNameText, boolean taskStatus) {
+    public TaskNoteEntity(int id, Date createDate, String taskNameText, boolean taskDone) {
         this.id = id;
         this.createDate = createDate;
         this.taskNameText = taskNameText;
-        this.taskStatus = taskStatus;
+        this.taskDone = taskDone;
     }
 
+    @Ignore
     public TaskNoteEntity(Date createDate, String taskNameText) {
         this.createDate = createDate;
         this.taskNameText = taskNameText;
@@ -47,12 +55,12 @@ public class TaskNoteEntity {
         this.taskNameText = taskNameText;
     }
 
-    public boolean isTaskStatus() {
-        return taskStatus;
+    public boolean isTaskDone() {
+        return taskDone;
     }
 
-    public void setTaskStatus(boolean taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setTaskDone(boolean taskDone) {
+        this.taskDone = taskDone;
     }
 
     @Override
@@ -61,7 +69,7 @@ public class TaskNoteEntity {
                 "id=" + id +
                 ", createDate=" + createDate +
                 ", taskNameText='" + taskNameText + '\'' +
-                ", taskStatus=" + taskStatus +
+                ", taskStatus=" + taskDone +
                 '}';
     }
 }

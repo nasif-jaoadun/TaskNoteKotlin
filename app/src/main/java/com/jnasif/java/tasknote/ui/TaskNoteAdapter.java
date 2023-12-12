@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 import com.jnasif.java.tasknote.databinding.TaskNoteListItemBinding;
-import com.jnasif.java.tasknote.model.TaskNoteEntity;
+import com.jnasif.java.tasknote.database.TaskNoteEntity;
 
 import java.util.List;
 
@@ -38,8 +38,8 @@ public class TaskNoteAdapter extends RecyclerView.Adapter<TaskNoteAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskNoteEntity taskNote = mTaskNotes.get(position);
-        binding.textView.setText(taskNote.getTaskNameText());
-        binding.radioButton.setChecked(taskNote.isTaskStatus());
+        binding.textViewTaskDetails.setText(taskNote.getTaskNameText());
+        binding.radioButton.setChecked(taskNote.isTaskDone());
 
         binding.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.jnasif.java.tasknote.database.AppDatabase;
 import com.jnasif.java.tasknote.database.TaskNoteDao;
+import com.jnasif.java.tasknote.database.TaskNoteEntity;
 import com.jnasif.java.tasknote.utilities.SampleData;
 
 import org.junit.After;
@@ -42,5 +43,14 @@ public class DatabaseTest {
         int count = mDao.getCount();
         Log.i(TAG, "createAndRetrieveTaskNotes: count = " + count);
         assertEquals(SampleData.getTaskNotes().size(), count);
+    }
+
+    @Test
+    public void compareString(){
+        mDao.insertAllTaskNote(SampleData.getTaskNotes());
+        TaskNoteEntity original = SampleData.getTaskNotes().get(0);
+        TaskNoteEntity fromDb = mDao.getTaskNoteById(1);
+        assertEquals(original.getTaskNameText(),fromDb.getTaskNameText());
+        assertEquals(1,fromDb.getId());
     }
 }

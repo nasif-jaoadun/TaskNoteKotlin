@@ -47,8 +47,8 @@ public class DatabaseTest {
 
     @Test
     public void compareString(){
-        mDao.insertAllTaskNote(SampleData.getTaskNotes());
-        TaskNoteEntity original = SampleData.getTaskNotes().get(0);
+        mDao.insertAllTaskNote(SampleData.getTaskNotesWithoutId());
+        TaskNoteEntity original = SampleData.getTaskNotesWithoutId().get(0);
         TaskNoteEntity fromDb = mDao.getTaskNoteById(1);
         assertEquals(original.getTaskNameText(),fromDb.getTaskNameText());
         assertEquals(1,fromDb.getId());

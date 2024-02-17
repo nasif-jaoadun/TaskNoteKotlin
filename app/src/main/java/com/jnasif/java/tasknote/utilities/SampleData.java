@@ -17,4 +17,12 @@ public class SampleData {
         taskNotes.add(new TaskNoteEntity(3, Utility.getDate(-2), SAMPLE_TASK_3, false));
         return taskNotes;
     }
+
+    public static List<TaskNoteEntity> getTaskNotesWithoutId(){
+        List<TaskNoteEntity> taskNotes = new ArrayList<>();
+        taskNotes.add(new TaskNoteEntity(Utility.getDate(0), SAMPLE_TASK_1, false));
+        taskNotes.add(new TaskNoteEntity(Utility.getDate(-1), SAMPLE_TASK_2, false));
+        taskNotes.add(new TaskNoteEntity(Utility.getDate(-2), SAMPLE_TASK_3, false));
+        return taskNotes;
+    }
 }

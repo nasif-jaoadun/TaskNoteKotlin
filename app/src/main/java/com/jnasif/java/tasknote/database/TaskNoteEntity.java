@@ -26,9 +26,10 @@ public class TaskNoteEntity {
     }
 
     @Ignore
-    public TaskNoteEntity(Date createDate, String taskNameText) {
+    public TaskNoteEntity(Date createDate, String taskNameText, boolean taskDone) {
         this.createDate = createDate;
         this.taskNameText = taskNameText;
+        this.taskDone = taskDone;
     }
 
     public int getId() {

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -14,6 +15,7 @@ import com.jnasif.java.tasknote.databinding.ActivityMainBinding;
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
 import com.jnasif.java.tasknote.ui.TaskNoteAdapter;
 import com.jnasif.java.tasknote.utilities.SampleData;
+import com.jnasif.java.tasknote.viewmodel.MainViewModel;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-
     private TaskNoteAdapter taskNoteAdapter;
+    private MainViewModel mainViewModel;
 
     List<TaskNoteEntity> taskNotesData = new ArrayList<>();
 
@@ -47,8 +49,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        taskNotesData.addAll(SampleData.getTaskNotes());
+        initViewModel();
         setListVIewProperties();
+//        taskNotesData.addAll(SampleData.getTaskNotes());
+        taskNotesData.addAll(mainViewModel.mTaskNotes);
+    }
+
+    private void initViewModel() {
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
     }
 
     private void setListVIewProperties() {

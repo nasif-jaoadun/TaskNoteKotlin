@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.jnasif.java.tasknote.databinding.ActivityMainBinding;
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
+import com.jnasif.java.tasknote.databinding.ActivityMainBinding;
 import com.jnasif.java.tasknote.ui.TaskNoteAdapter;
-import com.jnasif.java.tasknote.utilities.SampleData;
 import com.jnasif.java.tasknote.viewmodel.MainViewModel;
 
 import android.view.Menu;
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_sample_data) {
             return true;
         }
 

@@ -17,7 +17,7 @@ public class MainViewModel extends AndroidViewModel {
     private AppRepository mAppRepository;
     public MainViewModel(@NonNull Application application) {
         super(application);
-        mAppRepository = AppRepository.getInstance();
+        mAppRepository = AppRepository.getInstance(application.getApplicationContext());
         mTaskNotes = mAppRepository.mTaskNotes;
     }
 }

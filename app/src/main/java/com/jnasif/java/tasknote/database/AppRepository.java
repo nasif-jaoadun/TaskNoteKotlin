@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import androidx.lifecycle.LiveData;
+
 public class AppRepository {
     private static AppRepository repositoryInstance;
-    public List<TaskNoteEntity> mTaskNotes;
+    public LiveData<List<TaskNoteEntity>> mTaskNotes;
     private AppDatabase mDb;
     private Executor executor = Executors.newSingleThreadExecutor();
     public static AppRepository getInstance(Context context){
@@ -20,7 +22,7 @@ public class AppRepository {
     }
     private AppRepository(Context context){
         mDb = AppDatabase.getInstance(context);
-        mTaskNotes = SampleData.getTaskNotes();
+        mTaskNotes = getAllTaskNotes();
     }
 
     private void addSampleData(){
@@ -30,5 +32,9 @@ public class AppRepository {
                 mDb.taskNoteDao().insertAllTaskNote(SampleData.getTaskNotes());
             }
         });
+    }
+
+    private LiveData<List<TaskNoteEntity>> getAllTaskNotes(){
+        return mDb.taskNoteDao().getAll();
     }
 }

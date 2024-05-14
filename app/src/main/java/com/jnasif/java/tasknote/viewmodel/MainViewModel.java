@@ -10,10 +10,11 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public List<TaskNoteEntity> mTaskNotes ;
+    public LiveData<List<TaskNoteEntity>> mTaskNotes ;
     private AppRepository mAppRepository;
     public MainViewModel(@NonNull Application application) {
         super(application);

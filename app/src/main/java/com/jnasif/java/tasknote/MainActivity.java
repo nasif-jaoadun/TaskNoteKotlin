@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,23 +49,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        initRecyclerView();
         initViewModel();
-        setListVIewProperties();
 //        taskNotesData.addAll(SampleData.getTaskNotes());
-        taskNotesData.addAll(mainViewModel.mTaskNotes);
+//        taskNotesData.addAll(mainViewModel.mTaskNotes);
     }
 
     private void initViewModel() {
+        final Observer<List<TaskNoteEntity>> taskNoteObserver = new Observer<List<TaskNoteEntity>>() {
+            @Override
+            public void onChanged(List<TaskNoteEntity> taskNoteEntities) {
+                taskNotesData.clear();
+                taskNotesData.addAll(taskNoteEntities);
+                if(taskNoteAdapter==null){
+                    taskNoteAdapter = new TaskNoteAdapter(taskNotesData, MainActivity.this);
+                    binding.layoutContentMain.recyclerVIew.setAdapter(taskNoteAdapter);
+                }else{
+                    taskNoteAdapter.notifyDataSetChanged();
+                }
+            }
+        };
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        mainViewModel.mTaskNotes.observe(this,taskNoteObserver);
     }
 
-    private void setListVIewProperties() {
+    private void initRecyclerView() {
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.layoutContentMain.recyclerVIew.setLayoutManager(linearLayoutManager);
 
-        taskNoteAdapter = new TaskNoteAdapter(taskNotesData, this);
-        binding.layoutContentMain.recyclerVIew.setAdapter(taskNoteAdapter);
+
     }
 
     @Override

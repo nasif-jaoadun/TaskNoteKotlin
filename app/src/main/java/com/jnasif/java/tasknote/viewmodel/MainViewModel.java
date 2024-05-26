@@ -21,4 +21,12 @@ public class MainViewModel extends AndroidViewModel {
         mAppRepository = AppRepository.getInstance(application.getApplicationContext());
         mTaskNotes = mAppRepository.mTaskNotes;
     }
+
+    public void addSampleData(){
+        mAppRepository.addSampleData();
+    }
+
+    public void deleteAllTaskNotes() {
+        mAppRepository.deleteAllTaskNotes();
+    }
 }

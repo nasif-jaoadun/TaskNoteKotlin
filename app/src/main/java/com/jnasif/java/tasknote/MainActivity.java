@@ -97,9 +97,21 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_sample_data) {
+            addSampleData();
+            return true;
+        }else if (id == R.id.action_delete_all_data){
+            deleteAllTaskNotes();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteAllTaskNotes() {
+        mainViewModel.deleteAllTaskNotes();
+    }
+
+    private void addSampleData() {
+        mainViewModel.addSampleData();
     }
 }

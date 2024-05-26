@@ -25,16 +25,25 @@ public class AppRepository {
         mTaskNotes = getAllTaskNotes();
     }
 
-    private void addSampleData(){
+    public void addSampleData(){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.taskNoteDao().insertAllTaskNote(SampleData.getTaskNotes());
+                mDb.taskNoteDao().insertAllTaskNote(SampleData.getTaskNotesWithoutId());
             }
         });
     }
 
     private LiveData<List<TaskNoteEntity>> getAllTaskNotes(){
         return mDb.taskNoteDao().getAll();
+    }
+
+    public void deleteAllTaskNotes() {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.taskNoteDao().deleteALl();
+            }
+        });
     }
 }

@@ -12,23 +12,26 @@ public class TaskNoteEntity {
     private int id;
     private Date createDate;
     private String taskNameText;
+    private String taskNote;
     private boolean taskDone;
 
     @Ignore
     public TaskNoteEntity() {
     }
 
-    public TaskNoteEntity(int id, Date createDate, String taskNameText, boolean taskDone) {
+    public TaskNoteEntity(int id, Date createDate, String taskNameText, String taskNote, boolean taskDone) {
         this.id = id;
         this.createDate = createDate;
         this.taskNameText = taskNameText;
+        this.taskNote = taskNote;
         this.taskDone = taskDone;
     }
 
     @Ignore
-    public TaskNoteEntity(Date createDate, String taskNameText, boolean taskDone) {
+    public TaskNoteEntity(Date createDate, String taskNameText, String taskNote, boolean taskDone) {
         this.createDate = createDate;
         this.taskNameText = taskNameText;
+        this.taskNote = taskNote;
         this.taskDone = taskDone;
     }
 
@@ -54,6 +57,14 @@ public class TaskNoteEntity {
 
     public void setTaskNameText(String taskNameText) {
         this.taskNameText = taskNameText;
+    }
+
+    public String getTaskNote() {
+        return taskNote;
+    }
+
+    public void setTaskNote(String taskNote) {
+        this.taskNote = taskNote;
     }
 
     public boolean isTaskDone() {

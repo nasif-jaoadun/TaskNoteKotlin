@@ -38,7 +38,8 @@ public class TaskNoteAdapter extends RecyclerView.Adapter<TaskNoteAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskNoteEntity taskNote = mTaskNotes.get(position);
-        binding.textViewTaskDetails.setText(taskNote.getTaskNameText());
+        binding.textViewTaskName.setText(taskNote.getTaskNameText());
+        binding.textViewTaskDetails.setText(taskNote.getTaskNote());
         binding.radioButton.setChecked(taskNote.isTaskDone());
 
         binding.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

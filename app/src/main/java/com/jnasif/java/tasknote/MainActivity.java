@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.layoutContentMain.recyclerVIew.setLayoutManager(linearLayoutManager);
-
-
     }
 
     @Override

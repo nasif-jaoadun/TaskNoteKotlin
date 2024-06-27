@@ -11,15 +11,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.View;
 
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
 import com.jnasif.java.tasknote.databinding.ActivityEditorBinding;
+import com.jnasif.java.tasknote.utilities.Utility;
 import com.jnasif.java.tasknote.viewmodel.EditorViewModel;
+
+import static com.jnasif.java.tasknote.utilities.Constants.TASK_NOTE_ID_KEY;
 
 public class EditorActivity extends AppCompatActivity {
     private EditorViewModel mViewModel;
     private ActivityEditorBinding binding;
+    private boolean mNewTaskNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class EditorActivity extends AppCompatActivity {
 //        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
 //        toolBarLayout.setTitle(getTitle());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_done);
 
         FloatingActionButton fab = binding.fab;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,9 +56,23 @@ public class EditorActivity extends AppCompatActivity {
         mViewModel.mLiveTaskNote.observe(this, new Observer<TaskNoteEntity>() {
             @Override
             public void onChanged(TaskNoteEntity taskNoteEntity) {
-                binding.layoutContentEditor.editTextTaskNote.getText();
-                binding.layoutContentEditor.editTextTaskNoteDetails.getText();
+                if(taskNoteEntity!=null){
+                    binding.layoutContentEditor.editTextTaskNote.setText(taskNoteEntity.getTaskNameText());
+                    binding.layoutContentEditor.editTextTaskNoteDetails.setText(taskNoteEntity.getTaskNote());
+                }
             }
         });
+
+        Bundle extras = getIntent().getExtras();
+        if (extras==null){
+            setTitle(getString(R.string.new_task_note));
+            Utility.showLog(Log.ERROR, "ID Of the Task is: null");
+            mNewTaskNote = true;
+        }else {
+            setTitle(getString(R.string.edit_task_note));
+            int taskNoteId = extras.getInt(TASK_NOTE_ID_KEY);
+            Utility.showLog(Log.ERROR, "ID Of the Task is: "+ taskNoteId);
+            mViewModel.loadData(taskNoteId);
+        }
     }
 }

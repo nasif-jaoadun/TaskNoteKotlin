@@ -1,17 +1,24 @@
 package com.jnasif.java.tasknote.ui;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import com.jnasif.java.tasknote.EditorActivity;
 import com.jnasif.java.tasknote.databinding.TaskNoteListItemBinding;
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
+import com.jnasif.java.tasknote.utilities.Utility;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static com.jnasif.java.tasknote.utilities.Constants.TASK_NOTE_ID_KEY;
 
 public class TaskNoteAdapter extends RecyclerView.Adapter<TaskNoteAdapter.ViewHolder> {
 
@@ -40,14 +47,24 @@ public class TaskNoteAdapter extends RecyclerView.Adapter<TaskNoteAdapter.ViewHo
         final TaskNoteEntity taskNote = mTaskNotes.get(position);
         binding.textViewTaskName.setText(taskNote.getTaskNameText());
         binding.textViewTaskDetails.setText(taskNote.getTaskNote());
-        binding.radioButton.setChecked(taskNote.isTaskDone());
+
+        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, EditorActivity.class);
+                Utility.showLog(Log.WARN, "ID Of the Task is: "+ taskNote.getId());
+                intent.putExtra(TASK_NOTE_ID_KEY, taskNote.getId());
+                mContext.startActivity(intent);
+            }
+        });
+        /*binding.radioButton.setChecked(taskNote.isTaskDone());
 
         binding.radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
             }
-        });
+        });*/
     }
 
     @Override

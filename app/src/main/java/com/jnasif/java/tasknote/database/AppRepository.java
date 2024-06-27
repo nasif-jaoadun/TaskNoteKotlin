@@ -46,4 +46,8 @@ public class AppRepository {
             }
         });
     }
+
+    public TaskNoteEntity getTaskNoteById(int taskNoteId) {
+        return mDb.taskNoteDao().getTaskNoteById(taskNoteId);
+    }
 }

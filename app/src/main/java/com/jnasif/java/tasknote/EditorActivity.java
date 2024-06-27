@@ -6,12 +6,14 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
@@ -74,5 +76,24 @@ public class EditorActivity extends AppCompatActivity {
             Utility.showLog(Log.ERROR, "ID Of the Task is: "+ taskNoteId);
             mViewModel.loadData(taskNoteId);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            saveAndReturn();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        saveAndReturn();
+    }
+
+    private void saveAndReturn() {
+
     }
 }

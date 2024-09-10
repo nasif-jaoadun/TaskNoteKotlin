@@ -31,4 +31,15 @@ public class EditorViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void saveTaskNote(String taskText, String noteText) {
+        TaskNoteEntity taskNote = mLiveTaskNote.getValue();
+        if(taskNote == null){
+
+        }else {
+            taskNote.setTaskNameText(taskText);
+            taskNote.setTaskNote(noteText);
+        }
+        mRepository.insertTaskNote(taskNote);
+    }
 }

@@ -56,17 +56,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        final Observer<List<TaskNoteEntity>> taskNoteObserver = new Observer<List<TaskNoteEntity>>() {
-            @Override
-            public void onChanged(List<TaskNoteEntity> taskNoteEntities) {
-                taskNotesData.clear();
-                taskNotesData.addAll(taskNoteEntities);
-                if(taskNoteAdapter==null){
-                    taskNoteAdapter = new TaskNoteAdapter(taskNotesData, MainActivity.this);
-                    binding.layoutContentMain.recyclerVIew.setAdapter(taskNoteAdapter);
-                }else{
-                    taskNoteAdapter.notifyDataSetChanged();
-                }
+        final Observer<List<TaskNoteEntity>> taskNoteObserver = taskNoteEntities -> {
+            taskNotesData.clear();
+            taskNotesData.addAll(taskNoteEntities);
+            if(taskNoteAdapter==null){
+                taskNoteAdapter = new TaskNoteAdapter(taskNotesData, MainActivity.this);
+                binding.layoutContentMain.recyclerVIew.setAdapter(taskNoteAdapter);
+            }else{
+                binding.layoutContentMain.recyclerVIew.setAdapter(taskNoteAdapter);
+//                taskNoteAdapter.notifyDataSetChanged();
             }
         };
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);

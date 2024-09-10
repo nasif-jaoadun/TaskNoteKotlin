@@ -94,6 +94,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-
+        mViewModel.saveTaskNote(binding.layoutContentEditor.editTextTaskNote.getText().toString().trim(), binding.layoutContentEditor.editTextTaskNoteDetails.getText().toString().trim());
+        finish();
     }
 }

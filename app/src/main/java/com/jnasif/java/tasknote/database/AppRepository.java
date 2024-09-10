@@ -50,4 +50,13 @@ public class AppRepository {
     public TaskNoteEntity getTaskNoteById(int taskNoteId) {
         return mDb.taskNoteDao().getTaskNoteById(taskNoteId);
     }
+
+    public void insertTaskNote(TaskNoteEntity taskNote) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.taskNoteDao().insertTaskNote(taskNote);
+            }
+        });
+    }
 }

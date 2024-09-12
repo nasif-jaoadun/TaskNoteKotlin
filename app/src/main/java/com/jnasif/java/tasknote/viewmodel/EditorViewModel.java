@@ -1,10 +1,12 @@
 package com.jnasif.java.tasknote.viewmodel;
 
 import android.app.Application;
+import android.text.TextUtils;
 
 import com.jnasif.java.tasknote.database.AppRepository;
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
 
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -35,7 +37,10 @@ public class EditorViewModel extends AndroidViewModel {
     public void saveTaskNote(String taskText, String noteText) {
         TaskNoteEntity taskNote = mLiveTaskNote.getValue();
         if(taskNote == null){
-
+            if(TextUtils.isEmpty(taskText.trim()) || TextUtils.isEmpty(noteText.trim())){
+                return;
+            }
+            taskNote = new TaskNoteEntity(new Date(), taskText, noteText, false);
         }else {
             taskNote.setTaskNameText(taskText);
             taskNote.setTaskNote(noteText);

@@ -59,4 +59,13 @@ public class AppRepository {
             }
         });
     }
+
+    public void deleteTask(TaskNoteEntity taskNote) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.taskNoteDao().deleteTaskNote(taskNote);
+            }
+        });
+    }
 }

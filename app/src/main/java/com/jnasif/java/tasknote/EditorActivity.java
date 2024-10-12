@@ -96,6 +96,7 @@ public class EditorActivity extends AppCompatActivity {
             return true;
         }else if (item.getItemId() == R.id.action_delete){
             mViewModel.deleteTask();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

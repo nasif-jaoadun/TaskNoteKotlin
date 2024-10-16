@@ -20,15 +20,18 @@ import android.view.View;
 
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
 import com.jnasif.java.tasknote.databinding.ActivityEditorBinding;
+import com.jnasif.java.tasknote.utilities.Constants;
 import com.jnasif.java.tasknote.utilities.Utility;
 import com.jnasif.java.tasknote.viewmodel.EditorViewModel;
 
+import static com.jnasif.java.tasknote.utilities.Constants.EDITING_KEY;
 import static com.jnasif.java.tasknote.utilities.Constants.TASK_NOTE_ID_KEY;
 
 public class EditorActivity extends AppCompatActivity {
     private EditorViewModel mViewModel;
     private ActivityEditorBinding binding;
-    private boolean mNewTaskNote;
+    private boolean mNewTaskNote, mEditing = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class EditorActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        if(savedInstanceState != null){
+            mEditing= savedInstanceState.getBoolean(EDITING_KEY);
+        }
         initViewModel();
     }
 
@@ -60,7 +66,7 @@ public class EditorActivity extends AppCompatActivity {
         mViewModel.mLiveTaskNote.observe(this, new Observer<TaskNoteEntity>() {
             @Override
             public void onChanged(TaskNoteEntity taskNoteEntity) {
-                if(taskNoteEntity!=null){
+                if(taskNoteEntity!=null && !mEditing){
                     binding.layoutContentEditor.editTextTaskNote.setText(taskNoteEntity.getTaskNameText());
                     binding.layoutContentEditor.editTextTaskNoteDetails.setText(taskNoteEntity.getTaskNote());
                 }
@@ -110,5 +116,11 @@ public class EditorActivity extends AppCompatActivity {
     private void saveAndReturn() {
         mViewModel.saveTaskNote(binding.layoutContentEditor.editTextTaskNote.getText().toString().trim(), binding.layoutContentEditor.editTextTaskNoteDetails.getText().toString().trim());
         finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBoolean(Constants.EDITING_KEY, true);
+        super.onSaveInstanceState(outState);
     }
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.jnasif.java.tasknote.database.TaskNoteEntity;
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
         binding.layoutContentMain.recyclerVIew.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.layoutContentMain.recyclerVIew.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration divider = new DividerItemDecoration(binding.layoutContentMain.recyclerVIew.getContext(), linearLayoutManager.getOrientation());
+        binding.layoutContentMain.recyclerVIew.addItemDecoration(divider);
     }
 
     @Override
